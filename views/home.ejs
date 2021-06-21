@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Upload Files</h2>
+    <form action="/dud/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="uploadFile"><br>
+        <input type="submit" value="Upload">
+    </form><br><br><br><br>
+    <h2>Download Files</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    file name
+                </td>
+                <td>
+                    file id
+                </td>
+                <td>
+                    actions
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0; i < data.length > 0; i++) {%>
+            <tr>
+                <td><%= data[i].fileOriginalName %></td>
+                <td><%= data[i]._id %></td>
+                <td>
+                    <form action="/dud/returnurl/<%= data[i]._id %>" method="GET">
+                        <input type="submit" value="Download">
+                    </form>
+                    <form action="/dud/delete/<%= data[i]._id %>" method="POST">
+                        <input type="submit" value="Hard Delete">
+                    </form>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+
+</html>
